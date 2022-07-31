@@ -1,0 +1,56 @@
+#! /usr/share/iverilog-0.10.0/bin/vvp
+:ivl_version "0.10.0 (devel)" "(v0_9_6)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+:vpi_module "v2009";
+S_0x18548b0 .scope module, "halfadder_tb" "halfadder_tb" 2 3;
+ .timescale -9 -9;
+v0x1879000_0 .var "t_a", 0 0;
+v0x18790c0_0 .var "t_b", 0 0;
+v0x1879190_0 .net "t_carry", 0 0, L_0x18794c0;  1 drivers
+v0x1879290_0 .net "t_sum", 0 0, L_0x1879360;  1 drivers
+S_0x1865960 .scope module, "ha" "half_adder" 2 14, 3 3 0, S_0x18548b0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "sum"
+    .port_info 3 /OUTPUT 1 "carry"
+L_0x1879360 .functor XOR 1, v0x1879000_0, v0x18790c0_0, C4<0>, C4<0>;
+L_0x18794c0 .functor AND 1, v0x1879000_0, v0x18790c0_0, C4<1>, C4<1>;
+v0x1865b30_0 .net "a", 0 0, v0x1879000_0;  1 drivers
+v0x1878d00_0 .net "b", 0 0, v0x18790c0_0;  1 drivers
+v0x1878dc0_0 .net "carry", 0 0, L_0x18794c0;  alias, 1 drivers
+v0x1878e90_0 .net "sum", 0 0, L_0x1879360;  alias, 1 drivers
+    .scope S_0x18548b0;
+T_0 ;
+    %vpi_call/w 2 23 "$dumpfile", "haout.vcd" {0 0};
+    %vpi_call/w 2 24 "$dumpvars", 2'sb01, S_0x18548b0 {0 0};
+    %set/v v0x1879000_0, 0, 1;
+    %set/v v0x18790c0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 28 "$display", "a=%d, b=%d, s=%d, cout=%d", v0x1879000_0, v0x18790c0_0, v0x1879290_0, v0x1879190_0 {0 0};
+    %set/v v0x1879000_0, 0, 1;
+    %set/v v0x18790c0_0, 1, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 32 "$display", "a=%d, b=%d, s=%d, cout=%d", v0x1879000_0, v0x18790c0_0, v0x1879290_0, v0x1879190_0 {0 0};
+    %set/v v0x1879000_0, 1, 1;
+    %set/v v0x18790c0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 36 "$display", "a=%d, b=%d, s=%d, cout=%d", v0x1879000_0, v0x18790c0_0, v0x1879290_0, v0x1879190_0 {0 0};
+    %set/v v0x1879000_0, 1, 1;
+    %set/v v0x18790c0_0, 1, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 40 "$display", "a=%d, b=%d, s=%d, cout=%d", v0x1879000_0, v0x18790c0_0, v0x1879290_0, v0x1879190_0 {0 0};
+    %vpi_call/w 2 42 "$finish" {0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "testbench.sv";
+    "design.sv";
