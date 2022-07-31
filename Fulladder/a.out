@@ -1,0 +1,93 @@
+#! /usr/share/iverilog-0.10.0/bin/vvp
+:ivl_version "0.10.0 (devel)" "(v0_9_6)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+:vpi_module "v2009";
+S_0x8f8ef0 .scope module, "fulladdertb" "fulladdertb" 2 2;
+ .timescale -9 -9;
+v0x914d50_0 .var "a", 0 0;
+v0x914e10_0 .var "b", 0 0;
+v0x914ee0_0 .var "cin", 0 0;
+v0x914fe0_0 .net "cout", 0 0, L_0x9157f0;  1 drivers
+v0x9150b0_0 .net "sum", 0 0, L_0x915290;  1 drivers
+S_0x8f9070 .scope module, "fa" "fulladder" 2 5, 3 3 0, S_0x8f8ef0;
+ .timescale -9 -9;
+    .port_info 0 /OUTPUT 1 "s"
+    .port_info 1 /OUTPUT 1 "cout"
+    .port_info 2 /INPUT 1 "a"
+    .port_info 3 /INPUT 1 "b"
+    .port_info 4 /INPUT 1 "cin"
+L_0x915150 .functor XOR 1, v0x914d50_0, v0x914e10_0, C4<0>, C4<0>;
+L_0x915290 .functor XOR 1, L_0x915150, v0x914ee0_0, C4<0>, C4<0>;
+L_0x9153f0 .functor AND 1, v0x914d50_0, v0x914e10_0, C4<1>, C4<1>;
+L_0x915460 .functor AND 1, v0x914d50_0, v0x914ee0_0, C4<1>, C4<1>;
+L_0x915560 .functor OR 1, L_0x9153f0, L_0x915460, C4<0>, C4<0>;
+L_0x915620 .functor AND 1, v0x914e10_0, v0x914ee0_0, C4<1>, C4<1>;
+L_0x9157f0 .functor OR 1, L_0x915560, L_0x915620, C4<0>, C4<0>;
+v0x8d54d0_0 .net *"_s0", 0 0, L_0x915150;  1 drivers
+v0x914500_0 .net *"_s10", 0 0, L_0x915620;  1 drivers
+v0x9145c0_0 .net *"_s4", 0 0, L_0x9153f0;  1 drivers
+v0x914690_0 .net *"_s6", 0 0, L_0x915460;  1 drivers
+v0x914750_0 .net *"_s8", 0 0, L_0x915560;  1 drivers
+v0x914860_0 .net "a", 0 0, v0x914d50_0;  1 drivers
+v0x914920_0 .net "b", 0 0, v0x914e10_0;  1 drivers
+v0x9149e0_0 .net "cin", 0 0, v0x914ee0_0;  1 drivers
+v0x914aa0_0 .net "cout", 0 0, L_0x9157f0;  alias, 1 drivers
+v0x914bf0_0 .net "s", 0 0, L_0x915290;  alias, 1 drivers
+    .scope S_0x8f8ef0;
+T_0 ;
+    %vpi_call/w 2 8 "$dumpfile", "dump.vcd" {0 0};
+    %vpi_call/w 2 9 "$dumpvars", 2'sb01, S_0x8f8ef0 {0 0};
+    %set/v v0x914d50_0, 0, 1;
+    %set/v v0x914e10_0, 0, 1;
+    %set/v v0x914ee0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 14 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 0, 1;
+    %set/v v0x914e10_0, 0, 1;
+    %set/v v0x914ee0_0, 1, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 19 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 0, 1;
+    %set/v v0x914e10_0, 1, 1;
+    %set/v v0x914ee0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 24 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 0, 1;
+    %set/v v0x914e10_0, 1, 1;
+    %set/v v0x914ee0_0, 1, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 29 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 1, 1;
+    %set/v v0x914e10_0, 0, 1;
+    %set/v v0x914ee0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 34 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 1, 1;
+    %set/v v0x914e10_0, 0, 1;
+    %set/v v0x914ee0_0, 1, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 39 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 1, 1;
+    %set/v v0x914e10_0, 1, 1;
+    %set/v v0x914ee0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 44 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %set/v v0x914d50_0, 1, 1;
+    %set/v v0x914e10_0, 1, 1;
+    %set/v v0x914ee0_0, 1, 1;
+    %delay 10, 0;
+    %vpi_call/w 2 49 "$display", "a = %d, b = %d, cin = %d, sum = %d, cout = %d", v0x914d50_0, v0x914e10_0, v0x914ee0_0, v0x9150b0_0, v0x914fe0_0 {0 0};
+    %vpi_call/w 2 50 "$finish" {0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "testbench.sv";
+    "design.sv";
